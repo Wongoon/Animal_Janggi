@@ -1,0 +1,15 @@
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\bin\Debug\net8.0\Animal_Janggi_CUI.exe
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\bin\Debug\net8.0\Animal_Janggi_CUI.deps.json
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\bin\Debug\net8.0\Animal_Janggi_CUI.runtimeconfig.json
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\bin\Debug\net8.0\Animal_Janggi_CUI.dll
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\bin\Debug\net8.0\Animal_Janggi_CUI.pdb
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.AssemblyInfo.cs
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.sourcelink.json
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.dll
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\refint\Animal_Janggi_CUI.dll
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.pdb
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\Animal_Janggi_CUI.genruntimeconfig.cache
+C:\Users\User\Documents\GitHub\Animal_Janggi\Animal_Janggi_CUI\obj\Debug\net8.0\ref\Animal_Janggi_CUI.dll

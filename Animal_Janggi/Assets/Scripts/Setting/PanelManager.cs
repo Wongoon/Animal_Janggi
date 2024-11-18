@@ -39,7 +39,7 @@ public class PanelManager : MonoBehaviour
             settingPanel.SetActive(false);
         }
         else if (panel.Equals("all")) {
-            panelAll.SetActive(true);
+            panelAll.SetActive(false);
         }
         else {
             Debug.Log("Down Error");
