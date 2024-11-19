@@ -13,7 +13,7 @@ public class PanelManager : MonoBehaviour
     void Awake() {
         mainPanel.SetActive(panelActive);
         
-        Time.timeScale = 0;
+        Time.timeScale = panelActive ? 1.0f : 0.0f;
     }
 
     public void PanelUp(String panel) {
