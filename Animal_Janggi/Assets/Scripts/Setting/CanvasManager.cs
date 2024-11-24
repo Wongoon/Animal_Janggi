@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField] bool canvasRender;
+    [SerializeField] public bool canvasRender;
     public GameObject canvas;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,8 @@ public class CanvasManager : MonoBehaviour
             canvasRender = !canvasRender;
 
             canvas.SetActive(canvasRender);
-            Time.timeScale = canvasRender ? 1.0f : 0.0f;
+            Cursor.lockState = canvasRender ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = canvasRender;
         }
     }
 }
