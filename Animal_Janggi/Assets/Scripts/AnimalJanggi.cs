@@ -99,26 +99,16 @@ public class AnimalJanggi : MonoBehaviour
     public void SelectTile(RaycastHit hit, int x, int y) {
         Renderer renderer = hit.collider.GetComponent<Renderer>();
         if (hit.transform.parent.CompareTag(team)) {
-            if (y == 3) {
+            if (y == 3 && team == "Red") {
                 renderer.material = redChoice;
             }
-            else if (y == 0) {
-                return;
-            }
-            else {
-                renderer.material = normalChoice;
-            }
-        }
-        else if (hit.transform.parent.CompareTag(team)) {
-            if (y == 0) {
+            else if (y == 0 && team == "Green") {
                 renderer.material = greenChoice;
             }
-            else if (y == 3) {
-                return;
-            }
             else {
                 renderer.material = normalChoice;
             }
+
         }
     }
 }
