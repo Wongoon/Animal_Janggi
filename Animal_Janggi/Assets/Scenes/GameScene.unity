@@ -1409,7 +1409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 507848331}
   m_Layer: 0
-  m_Name: Board 2
+  m_Name: Board 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1564,7 +1564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512073287}
   m_Layer: 0
-  m_Name: Board 3
+  m_Name: Board 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3654,18 +3654,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tiles:
-  - {fileID: 2065475991}
-  - {fileID: 323622645}
-  - {fileID: 1336611863}
-  - {fileID: 809996788}
-  - {fileID: 2057458584}
-  - {fileID: 499658417}
-  - {fileID: 1565808875}
-  - {fileID: 62468826}
-  - {fileID: 1951558627}
   - {fileID: 58658275}
   - {fileID: 496736906}
   - {fileID: 816953471}
+  - {fileID: 1565808875}
+  - {fileID: 62468826}
+  - {fileID: 1951558627}
+  - {fileID: 809996788}
+  - {fileID: 2057458584}
+  - {fileID: 499658417}
+  - {fileID: 2065475991}
+  - {fileID: 323622645}
+  - {fileID: 1336611863}
 --- !u!4 &988206728
 Transform:
   m_ObjectHideFlags: 0
@@ -3958,6 +3958,9 @@ MonoBehaviour:
   redNone: {fileID: 2100000, guid: 9b72b0569e4cdf04b899ce7a4a19637d, type: 2}
   greenChoice: {fileID: 2100000, guid: ea916ad92d997344bada7176f9769603, type: 2}
   greenNone: {fileID: 2100000, guid: 08a6220e63e777e418e491194fe04aca, type: 2}
+  normalHighlight: {fileID: 2100000, guid: 0e2fbef230c651d42b54924edf3fc459, type: 2}
+  redHighlight: {fileID: 2100000, guid: bf250c1a938d76945808739b300677ba, type: 2}
+  greenHighlight: {fileID: 2100000, guid: 76cefb74b22945d4db61f82bc61ece3b, type: 2}
 --- !u!4 &1039433930
 Transform:
   m_ObjectHideFlags: 0
@@ -6249,6 +6252,50 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1650411089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1650411091}
+  - component: {fileID: 1650411090}
+  m_Layer: 0
+  m_Name: Piece Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1650411090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650411089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14077de94381933409274a37a635ab04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1650411091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650411089}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.2437375, y: 1.0780027, z: -1.1421462}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654799848
 GameObject:
   m_ObjectHideFlags: 0
@@ -6634,7 +6681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1765751524}
   m_Layer: 0
-  m_Name: Board 1
+  m_Name: Board 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7123,7 +7170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877528651}
   m_Layer: 0
-  m_Name: Board 4
+  m_Name: Board 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8228,10 +8275,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1765751524}
-  - {fileID: 507848331}
-  - {fileID: 512073287}
   - {fileID: 1877528651}
+  - {fileID: 512073287}
+  - {fileID: 507848331}
+  - {fileID: 1765751524}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2112431283
@@ -8538,3 +8585,4 @@ SceneRoots:
   - {fileID: 2108975727}
   - {fileID: 988206728}
   - {fileID: 1039433930}
+  - {fileID: 1650411091}
