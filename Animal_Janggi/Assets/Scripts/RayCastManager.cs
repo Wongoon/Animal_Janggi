@@ -25,13 +25,33 @@ public class RayCastManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0)) {
             Vector3 direction = pos.forward;
-            AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
             if (Physics.Raycast(pos.position, direction, out hit, Mathf.Infinity, layerMask)) {
                 var (x, y) = NameToInt(hit);
                 Debug.Log(x + ", " + y + " / " + AnimalJanggi._instance.CheckTile(x, y));
-                if (hit.transform.parent.CompareTag(AnimalJanggi._instance.GetTeam())) {
-                    AnimalJanggi._instance.SelectTile(hit, x, y);
+                if (hit.transform.parent.CompareTag(AnimalJanggi._instance.GetTeam()) && !AnimalJanggi._instance.GetSelected()) {
                     PieceMoving._instance.CheckBoard(x, y);
+                    AnimalJanggi._instance.SelectTile(hit, x, y);
+                    AnimalJanggi._instance.SetSelected();
+                }
+                else if (AnimalJanggi._instance.GetSelected()) {
+                    Material normalHighlight = AnimalJanggi._instance.normalHighlight;
+                    Material redHightlight = AnimalJanggi._instance.redHighlight;
+                    Material greenHightlight = AnimalJanggi._instance.greenHighlight;
+                    Material hitMaterial = hit.transform.GetComponent<Renderer>().material;
+                    Debug.Log(hitMaterial.name);
+                    if (hitMaterial == normalHighlight || hitMaterial == redHightlight || hitMaterial == greenHightlight) {
+                        PieceMoving._instance.PieceMove();
+                    }
+                    else {
+                        AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
+                    }
+                    AnimalJanggi._instance.SetSelected();
+                }
+            }
+            else {
+                AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
+                if (AnimalJanggi._instance.GetSelected()) {
+                    AnimalJanggi._instance.SetSelected();
                 }
             }
             PieceMoving._instance.selectlist.Clear();

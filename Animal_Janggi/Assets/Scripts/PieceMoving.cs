@@ -51,8 +51,8 @@ public class PieceMoving : MonoBehaviour
         foreach (var item in selectlist)
         {
             Debug.Log(item.x + ", " + item.y);
+            SetSelected(item.x, item.y);
         }
-        SetSelected(team);
     }
 
     public bool IsInBounds(int x, int y) {
@@ -132,7 +132,25 @@ public class PieceMoving : MonoBehaviour
         }
     }
 
-    public void SetSelected(string team) {
-        
+    public void SetSelected(int x, int y) {
+        AnimalJanggi._instance.ResetRenderQueue();
+        Renderer renderer = AnimalJanggi._instance.GUIBoard[y * 3 + x].transform.GetChild(0).GetComponent<Renderer>();
+        if (y == 0) {
+            AnimalJanggi._instance.SetRenderQueue(AnimalJanggi._instance.redHighlight, 2000);
+            renderer.material = AnimalJanggi._instance.redHighlight;
+        }
+        else if (y == 3) {
+            AnimalJanggi._instance.SetRenderQueue(AnimalJanggi._instance.greenHighlight, 2000);
+            renderer.material = AnimalJanggi._instance.greenHighlight;
+        }
+        else {
+            AnimalJanggi._instance.SetRenderQueue(AnimalJanggi._instance.normalHighlight, 2000);
+            renderer.material = AnimalJanggi._instance.normalHighlight;
+        }
+        Debug.Log(renderer.material.name);
+    }
+
+    public void PieceMove() {
+        Debug.Log("PIECE MOVE");
     }
 }

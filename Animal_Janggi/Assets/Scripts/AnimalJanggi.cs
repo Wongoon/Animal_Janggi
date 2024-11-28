@@ -32,6 +32,7 @@ public class AnimalJanggi : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+        ResetRenderQueue();
     }
 
     void Start()
@@ -89,9 +90,16 @@ public class AnimalJanggi : MonoBehaviour
         }
     }
 
+    public bool GetSelected() {
+        return selected;
+    }
+
+    public void SetSelected() {
+        selected = !selected;
+    }
+
     public void ResetChoice(GameObject[] boards)
     {
-        Renderer renderer = new();
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -104,18 +112,20 @@ public class AnimalJanggi : MonoBehaviour
                 }
                 Transform cubeTransform = boards[index].transform.GetChild(0);
 
-                renderer = cubeTransform.GetComponent<Renderer>();
-
-                if (i == 0)
+                Renderer renderer = cubeTransform.GetComponent<Renderer>();
+                if (i == 3)
                 {
+                    SetRenderQueue(greenNone, 2000);
                     renderer.material = greenNone;
                 }
-                else if (i == 3)
+                else if (i == 0)
                 {
+                    SetRenderQueue(redNone, 2000);
                     renderer.material = redNone;
                 }
                 else
                 {
+                    SetRenderQueue(normalNone, 2000);
                     renderer.material = normalNone;
                 }
             }
@@ -124,22 +134,41 @@ public class AnimalJanggi : MonoBehaviour
 
     public void SelectTile(RaycastHit hit, int x, int y)
     {
+        ResetRenderQueue();
         Renderer renderer = hit.collider.GetComponent<Renderer>();
         if (hit.transform.parent.CompareTag(team))
         {
             if (y == 0 && team == "Red")
             {
+                SetRenderQueue(redChoice, 2000);
                 renderer.material = redChoice;
             }
             else if (y == 3 && team == "Green")
             {
+                SetRenderQueue(greenChoice, 2000);
                 renderer.material = greenChoice;
             }
             else
             {
+                SetRenderQueue(normalChoice, 2000);
                 renderer.material = normalChoice;
             }
-
         }
+    }
+
+    public void SetRenderQueue(Material material, int renderQueue) {
+        material.renderQueue = renderQueue;
+    }
+    
+    public void ResetRenderQueue() {
+        normalChoice.renderQueue = 1500;
+        normalNone.renderQueue = 2000;
+        redChoice.renderQueue = 1500;
+        redNone.renderQueue = 2000;
+        greenChoice.renderQueue = 1500;
+        greenNone.renderQueue = 2000;
+        normalHighlight.renderQueue = 1500;
+        redHighlight.renderQueue = 1500;
+        greenHighlight.renderQueue = 1500;
     }
 }
