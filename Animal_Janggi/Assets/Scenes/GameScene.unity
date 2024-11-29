@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 1280652e94bb2f74aa387fe80ba6240a, type: 3}
+  m_Texture: {fileID: 10906, guid: 0000000000000000f000000000000000, type: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2146,7 +2146,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 500, y: 1, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2425,7 +2425,7 @@ MonoBehaviour:
   mainPanel: {fileID: 1305479031}
   settingPanel: {fileID: 1571767357}
   panelAll: {fileID: 708578103}
-  panelActive: 0
+  panelActive: 1
 --- !u!4 &674292488
 Transform:
   m_ObjectHideFlags: 0
@@ -2548,9 +2548,9 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 10
+  m_Range: 50
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -2608,7 +2608,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3351,6 +3351,7 @@ GameObject:
   - component: {fileID: 914987416}
   - component: {fileID: 914987418}
   - component: {fileID: 914987417}
+  - component: {fileID: 914987419}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -3415,6 +3416,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914987415}
   m_CullTransparentMesh: 1
+--- !u!114 &914987419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914987415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c99c8d299c535e49b970e1408da2863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 465640831}
 --- !u!1 &920390560
 GameObject:
   m_ObjectHideFlags: 0
@@ -3551,7 +3565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a93c992023caad4e9c280b163459e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasRender: 0
   canvas: {fileID: 2118606971}
 --- !u!4 &958872128
 Transform:
@@ -7672,7 +7685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 1305479031}
   settingPanel: {fileID: 1571767357}
-  panelAll: {fileID: 708578103}
+  panelAll: {fileID: 2118606971}
   panelActive: 1
 --- !u!4 &1928469082
 Transform:

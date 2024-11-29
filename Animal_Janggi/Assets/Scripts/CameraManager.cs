@@ -23,10 +23,6 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    void Start() {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
     void Update()
     {
         MouseRotation();
@@ -47,17 +43,11 @@ public class CameraManager : MonoBehaviour
     }
 
     public void CameraRotation() {
-        turnSpeed = 0;
         StartCoroutine(AdjustCamera());
-
-        turnSpeed = 1000;
     }
 
     IEnumerator AdjustCamera() {
-        Quaternion firstRotation = Quaternion.Euler(0, 0, 0);
-        Quaternion secondRotation = Quaternion.Euler(0, 180, 0);
-
-        yield return StartCoroutine(TargetRotation(transform, firstRotation));
+        Quaternion secondRotation = Quaternion.Euler(0, AnimalJanggi._instance.GetTeam() == "Red" ? 0 : 180, 0);
 
         yield return StartCoroutine(TargetRotation(cameraPosition, secondRotation));
     }
@@ -73,6 +63,6 @@ public class CameraManager : MonoBehaviour
             yield return null;
         }
 
-        obj.rotation = targetRotation;
+        obj.localRotation = targetRotation;
     }
 }

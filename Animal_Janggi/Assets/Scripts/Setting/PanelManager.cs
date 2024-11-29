@@ -12,6 +12,8 @@ public class PanelManager : MonoBehaviour
 
     void Awake() {
         mainPanel.SetActive(panelActive);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void PanelUp(String panel) {
@@ -38,6 +40,8 @@ public class PanelManager : MonoBehaviour
         }
         else if (panel.Equals("all")) {
             panelAll.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else {
             Debug.Log("Down Error");
