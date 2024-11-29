@@ -16,6 +16,9 @@ public class PieceMoving : MonoBehaviour
     private int prevX, prevY, nowX, nowY;
     public List<(int x, int y)> selectlist = new() { };
 
+    public GameObject redCatchPosition;
+    public GameObject greenCatchPosition;
+
     void Awake() {
         if (_instance == null) {
             _instance = this;
@@ -152,5 +155,9 @@ public class PieceMoving : MonoBehaviour
 
     public void PieceMove() {
         Debug.Log("PIECE MOVE");
+    }
+
+    public void CatchPiece() {
+
     }
 }

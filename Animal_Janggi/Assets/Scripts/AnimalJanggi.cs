@@ -63,6 +63,22 @@ public class AnimalJanggi : MonoBehaviour
         ResetChoice(GUIBoard);
     }
 
+    public void ResetFlip() {
+        foreach (var t in GUIBoard)
+        {
+            if (t.CompareTag("Green"))
+            {
+                t.transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = true;
+                t.transform.GetChild(1).GetComponent<SpriteRenderer>().flipY = true;
+            }
+            else if (t.CompareTag("Red"))
+            {
+                t.transform.GetChild(1).GetComponent<SpriteRenderer>().flipX = false;
+                t.transform.GetChild(1).GetComponent<SpriteRenderer>().flipY = false;
+            }
+        }
+    }
+
     public string CheckTile(int x, int y)
     {
         return board[y][x][0];

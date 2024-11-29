@@ -37,10 +37,15 @@ public class RayCastManager : MonoBehaviour
                     Material normalHighlight = AnimalJanggi._instance.normalHighlight;
                     Material redHightlight = AnimalJanggi._instance.redHighlight;
                     Material greenHightlight = AnimalJanggi._instance.greenHighlight;
-                    Material hitMaterial = hit.transform.GetComponent<Renderer>().material;
-                    Debug.Log(hitMaterial.name);
-                    if (hitMaterial == normalHighlight || hitMaterial == redHightlight || hitMaterial == greenHightlight) {
+                    string hitMaterial = hit.transform.GetComponent<Renderer>().material.name.Split(" ")[0];
+                    Debug.Log(normalHighlight.name);
+                    Debug.Log(redHightlight.name);
+                    Debug.Log(greenHightlight.name);
+                    if (hitMaterial == normalHighlight.name || hitMaterial == redHightlight.name || hitMaterial == greenHightlight.name) {
                         PieceMoving._instance.PieceMove();
+                        AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
+                        AnimalJanggi._instance.ChangeTeam();
+                        CameraManager._instance.CameraRotation();
                     }
                     else {
                         AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
