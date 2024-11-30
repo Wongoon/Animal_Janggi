@@ -33,7 +33,10 @@ public class PieceMoving : MonoBehaviour
         string team = AnimalJanggi._instance.GetTeam();
 
         switch (piece) {
-            case "King":
+            case "RedKing":
+                CheckKing(team, x, y);
+                break;
+            case "GreenKing":
                 CheckKing(team, x, y);
                 break;
             case "Knight":
@@ -51,9 +54,7 @@ public class PieceMoving : MonoBehaviour
             default:
                 break;
         }
-        foreach (var item in selectlist)
-        {
-            Debug.Log(item.x + ", " + item.y);
+        foreach (var item in selectlist) {
             SetSelected(item.x, item.y);
         }
     }
@@ -136,28 +137,35 @@ public class PieceMoving : MonoBehaviour
     }
 
     public void SetSelected(int x, int y) {
-        AnimalJanggi._instance.ResetRenderQueue();
-        Renderer renderer = AnimalJanggi._instance.GUIBoard[y * 3 + x].transform.GetChild(0).GetComponent<Renderer>();
+        SpriteRenderer renderer = AnimalJanggi._instance.GUIBoard[y * 3 + x].transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
         if (y == 0) {
-            AnimalJanggi._instance.SetRenderQueue(AnimalJanggi._instance.redHighlight, 2000);
-            renderer.material = AnimalJanggi._instance.redHighlight;
+            renderer.sprite = AnimalJanggi._instance.selectableTile[1];
         }
         else if (y == 3) {
-            AnimalJanggi._instance.SetRenderQueue(AnimalJanggi._instance.greenHighlight, 2000);
-            renderer.material = AnimalJanggi._instance.greenHighlight;
+            renderer.sprite = AnimalJanggi._instance.selectableTile[2];
         }
         else {
-            AnimalJanggi._instance.SetRenderQueue(AnimalJanggi._instance.normalHighlight, 2000);
-            renderer.material = AnimalJanggi._instance.normalHighlight;
+            renderer.sprite = AnimalJanggi._instance.selectableTile[0];
         }
-        Debug.Log(renderer.material.name);
     }
 
-    public void PieceMove() {
-        Debug.Log("PIECE MOVE");
+    public void PieceMove(int prevX, int prevY, int nowX, int nowY) {
+        string team = AnimalJanggi._instance.GetTeam();
+
+        string name = AnimalJanggi._instance.GUIBoard[prevY * 3 + prevX].transform.GetChild(1).GetComponent<SpriteRenderer>().sprite.name;
+        Debug.Log(name);
+        if (AnimalJanggi._instance.board[nowY][nowX][0] != "Null") {
+            CatchPiece(nowX, nowY);
+        }
+        AnimalJanggi._instance.board[prevY][prevX][0] = AnimalJanggi.PIECE[6];
+        AnimalJanggi._instance.board[prevY][prevX][1] = AnimalJanggi.TEAM[2];
+        AnimalJanggi._instance.board[nowY][nowX][0] = name;
+        AnimalJanggi._instance.board[nowY][nowX][1] = team;
+        AnimalJanggi._instance.ResetTile();
+        AnimalJanggi._instance.ResetTag();
     }
 
-    public void CatchPiece() {
+    public void CatchPiece(int x, int y) {
 
     }
 }

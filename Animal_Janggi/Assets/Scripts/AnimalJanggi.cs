@@ -9,21 +9,16 @@ using UnityEngine.UIElements;
 public class AnimalJanggi : MonoBehaviour
 {
     public static AnimalJanggi _instance;
-    private static readonly string[] PIECE = { "King", "Knight", "Rook", "Pawn", "Elephant", "Null" };
-    private static readonly string[] TEAM = { "Red", "Green", "Null" };
+    public static readonly string[] PIECE = { "RedKing", "GreenKing", "Knight", "Rook", "Pawn", "Elephant", "Null" };
+    public static readonly string[] TEAM = { "Red", "Green", "Null" };
+    [SerializeField] private Sprite[] sprites;
     public GameObject[] GUIBoard;
-    public Material normalChoice;
-    public Material normalNone;
-    public Material redChoice;
-    public Material redNone;
-    public Material greenChoice;
-    public Material greenNone;
-    public Material normalHighlight;
-    public Material redHighlight;
-    public Material greenHighlight;
-    private string[][][] board;
+    public string[][][] board;
     private bool selected;
     private string team = "Red";
+    public Sprite[] noneTile;
+    public Sprite[] choiceTile;
+    public Sprite[] selectableTile;
 
     void Awake() {
         if (_instance == null) {
@@ -32,31 +27,30 @@ public class AnimalJanggi : MonoBehaviour
         else {
             Destroy(gameObject);
         }
-        ResetRenderQueue();
     }
 
     void Start()
     {
         board = new string[][][] {
             new string[][] {
-                new string[] { PIECE[1], TEAM[0] },
+                new string[] { PIECE[2], TEAM[0] },
                 new string[] { PIECE[0], TEAM[0] },
-                new string[] { PIECE[2], TEAM[0] }
+                new string[] { PIECE[3], TEAM[0] }
             },
             new string[][] {
-                new string[] { PIECE[5], TEAM[2] },
-                new string[] { PIECE[3], TEAM[0] },
-                new string[] { PIECE[5], TEAM[2] }
+                new string[] { PIECE[6], TEAM[2] },
+                new string[] { PIECE[4], TEAM[0] },
+                new string[] { PIECE[6], TEAM[2] }
             },
             new string[][] {
-                new string[] { PIECE[5], TEAM[2] },
+                new string[] { PIECE[6], TEAM[2] },
+                new string[] { PIECE[4], TEAM[1] },
+                new string[] { PIECE[6], TEAM[2] }
+            },
+            new string[][] {
                 new string[] { PIECE[3], TEAM[1] },
-                new string[] { PIECE[5], TEAM[2] }
-            },
-            new string[][] {
-                new string[] { PIECE[2], TEAM[1] },
-                new string[] { PIECE[0], TEAM[1] },
-                new string[] { PIECE[1], TEAM[1] }
+                new string[] { PIECE[1], TEAM[1] },
+                new string[] { PIECE[2], TEAM[1] }
             }
         };
         selected = false;
@@ -128,63 +122,92 @@ public class AnimalJanggi : MonoBehaviour
                 }
                 Transform cubeTransform = boards[index].transform.GetChild(0);
 
-                Renderer renderer = cubeTransform.GetComponent<Renderer>();
+                SpriteRenderer renderer = cubeTransform.GetChild(0).GetComponent<SpriteRenderer>();
                 if (i == 3)
                 {
-                    SetRenderQueue(greenNone, 2000);
-                    renderer.material = greenNone;
+                    renderer.sprite = noneTile[2];
                 }
                 else if (i == 0)
                 {
-                    SetRenderQueue(redNone, 2000);
-                    renderer.material = redNone;
+                    renderer.sprite = noneTile[1];
                 }
                 else
                 {
-                    SetRenderQueue(normalNone, 2000);
-                    renderer.material = normalNone;
+                    renderer.sprite = noneTile[0];
                 }
             }
         }
+        ResetTile();
     }
 
     public void SelectTile(RaycastHit hit, int x, int y)
     {
-        ResetRenderQueue();
-        Renderer renderer = hit.collider.GetComponent<Renderer>();
+        SpriteRenderer renderer = hit.transform.GetChild(0).GetComponent<SpriteRenderer>();
         if (hit.transform.parent.CompareTag(team))
         {
             if (y == 0 && team == "Red")
             {
-                SetRenderQueue(redChoice, 2000);
-                renderer.material = redChoice;
+                renderer.sprite = choiceTile[1];
             }
             else if (y == 3 && team == "Green")
             {
-                SetRenderQueue(greenChoice, 2000);
-                renderer.material = greenChoice;
+                renderer.sprite = choiceTile[2];
             }
             else
             {
-                SetRenderQueue(normalChoice, 2000);
-                renderer.material = normalChoice;
+                renderer.sprite = choiceTile[0];
             }
         }
     }
 
-    public void SetRenderQueue(Material material, int renderQueue) {
-        material.renderQueue = renderQueue;
+    public void ResetTile() {
+        for (int i = 0; i < GUIBoard.Length; i++) {
+            int x = i % 3;
+            int y = i / 3;
+            SpriteRenderer spriteRenderer = GUIBoard[i].transform.GetChild(1).GetComponent<SpriteRenderer>();
+
+            if (CheckTile(x, y).Equals(PIECE[0])) {
+                spriteRenderer.sprite = sprites[0];
+            }
+            else if (CheckTile(x, y).Equals(PIECE[1])) {
+                spriteRenderer.sprite = sprites[1];
+            }
+            else if (CheckTile(x, y).Equals(PIECE[2])) {
+                spriteRenderer.sprite = sprites[2];
+            }
+            else if (CheckTile(x, y).Equals(PIECE[3])) {
+                spriteRenderer.sprite = sprites[3];
+            }
+            else if (CheckTile(x, y).Equals(PIECE[4])) {
+                spriteRenderer.sprite = sprites[4];
+            }
+            else if (CheckTile(x, y).Equals(PIECE[5])) {
+                spriteRenderer.sprite = sprites[5];
+            }
+            else if (CheckTile(x, y).Equals(PIECE[6])) {
+                spriteRenderer.sprite = sprites[6];
+            }
+        }
+        ResetFlip();
     }
-    
-    public void ResetRenderQueue() {
-        normalChoice.renderQueue = 1500;
-        normalNone.renderQueue = 2000;
-        redChoice.renderQueue = 1500;
-        redNone.renderQueue = 2000;
-        greenChoice.renderQueue = 1500;
-        greenNone.renderQueue = 2000;
-        normalHighlight.renderQueue = 1500;
-        redHighlight.renderQueue = 1500;
-        greenHighlight.renderQueue = 1500;
+
+    public void ResetTag() {
+        for (int i = 0; i < GUIBoard.Length; i++) {
+            int x = i % 3;
+            int y = i / 3;
+
+            string team = CheckTeam(x, y);
+
+            board[y][x][1] = team;
+            if (team == "Null") {
+                GUIBoard[i].tag = "Untagged";
+                continue;
+            }
+            GUIBoard[i].tag = team;
+        }
+    }
+
+    public void SetSprite() {
+
     }
 }

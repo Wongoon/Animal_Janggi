@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    public static bool canvasRender;
+    public static bool canvasRender = true;
     public GameObject canvas;
     // Start is called before the first frame update
     void Start()

@@ -42,6 +42,7 @@ public class PanelManager : MonoBehaviour
             panelAll.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            CanvasManager.canvasRender = false;
         }
         else {
             Debug.Log("Down Error");

@@ -30,8 +30,8 @@ public class CameraManager : MonoBehaviour
 
     void MouseRotation()
     {
-        float mouseX = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime * Time.timeScale;
-        float mouseY = Input.GetAxis("Mouse Y") * turnSpeed * Time.deltaTime * Time.timeScale;
+        float mouseX = Input.GetAxisRaw("Mouse X") * turnSpeed * Time.fixedDeltaTime * Time.timeScale;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * turnSpeed * Time.fixedDeltaTime * Time.timeScale;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, 0, 90f);

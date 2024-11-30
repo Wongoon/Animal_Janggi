@@ -14,6 +14,8 @@ public class RayCastManager : MonoBehaviour
     RaycastHit hit;
     int dist = 10;
 
+    int prevX, prevY;
+
     void Start()
     {
         layerNum = LayerMask.NameToLayer("Tile");
@@ -21,28 +23,24 @@ public class RayCastManager : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(pos.position, pos.forward * dist, Color.red);
-
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !CanvasManager.canvasRender) {
             Vector3 direction = pos.forward;
             if (Physics.Raycast(pos.position, direction, out hit, Mathf.Infinity, layerMask)) {
                 var (x, y) = NameToInt(hit);
-                Debug.Log(x + ", " + y + " / " + AnimalJanggi._instance.CheckTile(x, y));
                 if (hit.transform.parent.CompareTag(AnimalJanggi._instance.GetTeam()) && !AnimalJanggi._instance.GetSelected()) {
                     PieceMoving._instance.CheckBoard(x, y);
                     AnimalJanggi._instance.SelectTile(hit, x, y);
                     AnimalJanggi._instance.SetSelected();
+                    prevX = x;
+                    prevY = y;
                 }
                 else if (AnimalJanggi._instance.GetSelected()) {
-                    Material normalHighlight = AnimalJanggi._instance.normalHighlight;
-                    Material redHightlight = AnimalJanggi._instance.redHighlight;
-                    Material greenHightlight = AnimalJanggi._instance.greenHighlight;
-                    string hitMaterial = hit.transform.GetComponent<Renderer>().material.name.Split(" ")[0];
-                    Debug.Log(normalHighlight.name);
-                    Debug.Log(redHightlight.name);
-                    Debug.Log(greenHightlight.name);
-                    if (hitMaterial == normalHighlight.name || hitMaterial == redHightlight.name || hitMaterial == greenHightlight.name) {
-                        PieceMoving._instance.PieceMove();
+                    Sprite normalHighlight = AnimalJanggi._instance.selectableTile[0];
+                    Sprite redHighlight = AnimalJanggi._instance.selectableTile[1];
+                    Sprite greenHighlight = AnimalJanggi._instance.selectableTile[2];
+                    string hitSprite = hit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name;
+                    if (hitSprite == normalHighlight.name || hitSprite == redHighlight.name || hitSprite == greenHighlight.name) {
+                        PieceMoving._instance.PieceMove(prevX, prevY, x, y);
                         AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
                         AnimalJanggi._instance.ChangeTeam();
                         CameraManager._instance.CameraRotation();
