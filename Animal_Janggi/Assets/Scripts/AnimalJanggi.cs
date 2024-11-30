@@ -11,7 +11,7 @@ public class AnimalJanggi : MonoBehaviour
     public static AnimalJanggi _instance;
     public static readonly string[] PIECE = { "RedKing", "GreenKing", "Knight", "Rook", "Pawn", "Elephant", "Null" };
     public static readonly string[] TEAM = { "Red", "Green", "Null" };
-    [SerializeField] private Sprite[] sprites;
+    public Sprite[] sprites;
     public GameObject[] GUIBoard;
     public string[][][] board;
     private bool selected;
@@ -205,9 +205,5 @@ public class AnimalJanggi : MonoBehaviour
             }
             GUIBoard[i].tag = team;
         }
-    }
-
-    public void SetSprite() {
-
     }
 }

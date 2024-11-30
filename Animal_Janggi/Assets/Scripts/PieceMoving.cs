@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
@@ -155,17 +156,33 @@ public class PieceMoving : MonoBehaviour
         string name = AnimalJanggi._instance.GUIBoard[prevY * 3 + prevX].transform.GetChild(1).GetComponent<SpriteRenderer>().sprite.name;
         
         if (AnimalJanggi._instance.board[nowY][nowX][0] != "Null") {
-            CatchPiece(nowX, nowY);
+            Catch(nowX, nowY);
         }
         AnimalJanggi._instance.board[prevY][prevX][0] = AnimalJanggi.PIECE[6];
         AnimalJanggi._instance.board[prevY][prevX][1] = AnimalJanggi.TEAM[2];
         AnimalJanggi._instance.board[nowY][nowX][0] = name;
         AnimalJanggi._instance.board[nowY][nowX][1] = team;
+        if (AnimalJanggi._instance.board[nowY][nowX][0] == "Pawn" && (nowY == 3 || nowY == 0)) {
+            AnimalJanggi._instance.board[nowY][nowX][0] = AnimalJanggi.PIECE[5];
+        }
+        
         AnimalJanggi._instance.ResetTile();
         AnimalJanggi._instance.ResetTag();
     }
 
-    public void CatchPiece(int x, int y) {
-        Debug.Log("Catch Piece");
+    public void Catch(int x, int y) {
+        Sprite sprite = AnimalJanggi._instance.GUIBoard[y * 3 + x].transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
+        Debug.Log("Catch " + sprite.name);
+        CatchTile._instance.CatchPiece(sprite, AnimalJanggi._instance.GetTeam());
+    }
+
+    public void CatchTileToBoard(RaycastHit hit) {
+        string name = hit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name;
+        Debug.Log(name);
+        CheckSelectable();
+    }
+
+    public void CheckSelectable() {
+        // 이미 잡힌 타일을 클릭하면 어디에 둘 수 있는지에 대한 내용
     }
 }

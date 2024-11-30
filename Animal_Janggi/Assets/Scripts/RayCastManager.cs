@@ -53,7 +53,9 @@ public class RayCastManager : MonoBehaviour
                 }
             }
             else if (Physics.Raycast(pos.position, direction, out hit, Mathf.Infinity, catchLayerMask)) {
-                // 클릭 시 선택할 수 있는 위치 출력 후 selected에서 그 위치로 갈 수 있도록 한 다음 이 오브젝트.SetActive(false) 하기
+                if (hit.collider.CompareTag(AnimalJanggi._instance.GetTeam())) {
+                    PieceMoving._instance.CatchTileToBoard(hit);
+                }
             }
             else {
                 AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);
