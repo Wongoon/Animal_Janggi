@@ -10,15 +10,16 @@ public class RayCastManager : MonoBehaviour
     public Transform pos;
 
     [SerializeField] LayerMask layerMask;
-    int layerNum;
+    [SerializeField] LayerMask catchLayerMask;
+    int layerNum, catchLayerNum;
     RaycastHit hit;
-    int dist = 10;
 
     int prevX, prevY;
 
     void Start()
     {
         layerNum = LayerMask.NameToLayer("Tile");
+        catchLayerNum = LayerMask.NameToLayer("Catch");
     }
 
     void Update()
@@ -50,6 +51,9 @@ public class RayCastManager : MonoBehaviour
                     }
                     AnimalJanggi._instance.SetSelected();
                 }
+            }
+            else if (Physics.Raycast(pos.position, direction, out hit, Mathf.Infinity, catchLayerMask)) {
+                // 클릭 시 선택할 수 있는 위치 출력 후 selected에서 그 위치로 갈 수 있도록 한 다음 이 오브젝트.SetActive(false) 하기
             }
             else {
                 AnimalJanggi._instance.ResetChoice(AnimalJanggi._instance.GUIBoard);

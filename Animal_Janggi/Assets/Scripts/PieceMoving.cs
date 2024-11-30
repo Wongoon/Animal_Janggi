@@ -153,7 +153,7 @@ public class PieceMoving : MonoBehaviour
         string team = AnimalJanggi._instance.GetTeam();
 
         string name = AnimalJanggi._instance.GUIBoard[prevY * 3 + prevX].transform.GetChild(1).GetComponent<SpriteRenderer>().sprite.name;
-        Debug.Log(name);
+        
         if (AnimalJanggi._instance.board[nowY][nowX][0] != "Null") {
             CatchPiece(nowX, nowY);
         }
@@ -166,6 +166,6 @@ public class PieceMoving : MonoBehaviour
     }
 
     public void CatchPiece(int x, int y) {
-
+        Debug.Log("Catch Piece");
     }
 }
