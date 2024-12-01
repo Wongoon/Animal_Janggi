@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+using JetBrains.Annotations;
+using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -131,7 +132,7 @@ public class PieceMoving : MonoBehaviour
         for (int i = 0; i < dx.Length; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
-            if (IsInBounds(x, ny) && !AnimalJanggi._instance.CheckTeam(nx, ny).Equals(team)) {
+            if (IsInBounds(nx, ny) && !AnimalJanggi._instance.CheckTeam(nx, ny).Equals(team)) {
                 selectlist.Add((nx, ny));
             }
         }
@@ -173,16 +174,67 @@ public class PieceMoving : MonoBehaviour
     public void Catch(int x, int y) {
         Sprite sprite = AnimalJanggi._instance.GUIBoard[y * 3 + x].transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
         Debug.Log("Catch " + sprite.name);
+        if (sprite.name == "RedKing" || sprite.name == "GreenKing") {
+            AnimalJanggi._instance.Win(sprite.name);
+        }
         CatchTile._instance.CatchPiece(sprite, AnimalJanggi._instance.GetTeam());
     }
 
     public void CatchTileToBoard(RaycastHit hit) {
-        string name = hit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.name;
-        Debug.Log(name);
+        Sprite sprite = hit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        CatchTile._instance.index = int.Parse(hit.transform.name.Split(" ")[1]) - 1;
+        Debug.Log(sprite);
+        if (sprite == null) {
+            return;
+        }
         CheckSelectable();
     }
 
     public void CheckSelectable() {
-        // 이미 잡힌 타일을 클릭하면 어디에 둘 수 있는지에 대한 내용
+        string team = AnimalJanggi._instance.GetTeam();
+        for (int i = 0; i < AnimalJanggi._instance.GUIBoard.Length; i++) {
+            int x = i % 3;
+            int y = i / 3;
+            SpriteRenderer spriteRenderer = AnimalJanggi._instance.GUIBoard[i].transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
+
+            if (AnimalJanggi._instance.board[y][x][0] == AnimalJanggi.PIECE[6]) {
+                if (team.Equals("Red") && y == 3) {
+                    continue;
+                }
+                else if (team.Equals("Green") && y == 0) {
+                    continue;
+                }
+
+                if (y == 0) {
+                    spriteRenderer.sprite = AnimalJanggi._instance.selectableTile[1];
+                }
+                else if (y == 3) {
+                    spriteRenderer.sprite = AnimalJanggi._instance.selectableTile[2];
+                }
+                else {
+                    spriteRenderer.sprite = AnimalJanggi._instance.selectableTile[0];
+                }
+
+            }
+        }
+        CatchTile._instance.SetSelected();
+    }
+
+    public void CatchTileSelect(int index, int x, int y) {
+        string team = AnimalJanggi._instance.GetTeam();
+
+        if (team.Equals("Red")) {
+            AnimalJanggi._instance.board[y][x][0] = CatchTile._instance.redCatchTiles[index].name;
+            CatchTile._instance.redCatchTiles.RemoveAt(index);
+        }
+        else if (team.Equals("Green")) {
+            AnimalJanggi._instance.board[y][x][0] = CatchTile._instance.greenCatchTiles[index].name;
+            CatchTile._instance.greenCatchTiles.RemoveAt(index);
+        }
+        AnimalJanggi._instance.board[y][x][1] = team;
+        CatchTile._instance.ResetObjectList(team);
+
+        AnimalJanggi._instance.ResetTile();
+        AnimalJanggi._instance.ResetTag();
     }
 }

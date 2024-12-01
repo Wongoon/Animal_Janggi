@@ -13,6 +13,10 @@ public class CatchTile : MonoBehaviour
     public List<Sprite> redCatchTiles = new() { };
     public List<Sprite> greenCatchTiles = new() { };
 
+    public bool catchSelected;
+
+    public int index;
+
     void Awake() {
         if (_instance == null) {
             _instance = this;
@@ -25,6 +29,7 @@ public class CatchTile : MonoBehaviour
     void Start() {
         InitSprite(redCatchObjects);
         InitSprite(greenCatchObjects);
+        catchSelected = false;
     }
 
     private void InitSprite(GameObject[] gameObjects) {
@@ -32,6 +37,15 @@ public class CatchTile : MonoBehaviour
             SpriteRenderer spriteRenderer = tile.transform.GetChild(0).GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = AnimalJanggi._instance.sprites[6];
         }
+    }
+
+    public bool GetSelected() {
+        return catchSelected;
+    }
+
+    public void SetSelected() {
+        catchSelected = !catchSelected;
+        Debug.Log(catchSelected);
     }
 
     public void CatchPiece(Sprite sprite, string team) {
@@ -71,5 +85,12 @@ public class CatchTile : MonoBehaviour
                 spriteRenderer.sprite = AnimalJanggi._instance.sprites[6];
             }
         }
+    }
+
+    public bool GetSelectable(RaycastHit hit) {
+        if (hit.transform.parent.GetChild(1).GetComponent<SpriteRenderer>().sprite == null) {
+            return true;
+        }
+        return false;
     }
 }

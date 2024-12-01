@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Jobs.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class AnimalJanggi : MonoBehaviour
@@ -19,6 +19,7 @@ public class AnimalJanggi : MonoBehaviour
     public Sprite[] noneTile;
     public Sprite[] choiceTile;
     public Sprite[] selectableTile;
+    [SerializeField] private GameObject panel;
 
     void Awake() {
         if (_instance == null) {
@@ -205,5 +206,21 @@ public class AnimalJanggi : MonoBehaviour
             }
             GUIBoard[i].tag = team;
         }
+    }
+    
+    public void Win(string name) {
+        GameObject camera = GameObject.Find("Main Camera");
+        RayCastManager raycast = camera.GetComponent<RayCastManager>();
+        raycast.enabled = false;
+        Text text = panel.transform.GetChild(0).GetComponent<Text>();
+        if (name == "RedKing") {
+            text.text = "Green Win!";
+        }
+        else if (name == "GreenKing") {
+            text.text = "Red Win!";
+        }
+        panel.SetActive(true);
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
     }
 }
