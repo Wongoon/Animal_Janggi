@@ -34,10 +34,10 @@ public class CameraManager : MonoBehaviour
         float mouseY = Input.GetAxisRaw("Mouse Y") * turnSpeed * Time.fixedDeltaTime * Time.timeScale;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, 0, 90f);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -45f, 45f);
+        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
     }
